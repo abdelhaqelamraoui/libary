@@ -1,0 +1,14 @@
+
+
+CREATE DATABASE IF NOT EXISTS local_libary;
+
+USE local_libary;
+
+
+CREATE TABLE IF NOT EXISTS books (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  author VARCHAR(255),
+  loaner VARCHAR(255),
+  notes VARCHAR(255)
+);

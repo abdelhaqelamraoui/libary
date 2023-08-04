@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/is/index.css">
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <div class="actions">
+  
+      <div class="search-div">  
+        <button id="search">إبحث</button>
+        <input type="search" id="search-pattern" placeholder="عنوان أوكاتب الكتا أو المقترض">
+      </div>
+      
+      
+      <div class="options">
+        <button id="stats">إحصائيات</button>
+        <!-- <button>تحميل ملف إحصائي</button> -->
+        <!-- <button>إضافة كتاب</button> -->
+      </div>
+      
+    </div>
+  </header>
+
+  <main>
+
+    <div class="show">
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">اختيارات</th>
+            <th>ملاحظات</th>
+            <th>المقترض</th>
+            <th>الكاتب</th>
+            <th>العنوان</th>
+            <th>الرقم</th>
+          </tr>
+        </thead>
+        <tbody id="list"></tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <footer>
+    <form method="post" id="add-form">
+      <button id="add" name="add">إضافة</button>
+      <input type="text" id="notes" name="notes" placeholder="ملاحظات">
+      <input type="text" id="loaner" name="loaner" placeholder="المقترض">
+      <input type="text" id="author" name="author" placeholder="الكاتب">
+      <input type="text" id="title" name="title" placeholder="العنوان" required>
+    </form>
+  </footer>
+</body>
+
+
+<script src="assets/js/index.js"></script>
+<script>loadBooks()</script>
+</html>
