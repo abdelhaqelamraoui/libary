@@ -7,6 +7,9 @@
   margin: 0;
   box-sizing: border-box;
   text-align: right;
+  /* font-family: ; */
+  /* font-weight: bold; */
+  direction: rtl;
 }
 
 body {
@@ -47,7 +50,7 @@ footer form     {
   padding-bottom: 1em;
   align-items: center;
   column-gap: 1em;
-
+  width: 100%;
 }
 
 footer input {
@@ -56,7 +59,7 @@ footer input {
 }
 
 footer #notes {
-  flex: 2;
+  /* flex: 2; */
   
 }
 
@@ -84,7 +87,7 @@ main {
 }
 
 .search-div {
-
+  direction: rtl;
 }
 
 button, input {
@@ -117,19 +120,45 @@ table {
 
 table td,
 th {
-  border: 1px solid black;
+  border: 1px solid rgba(84, 82, 82, 0.704);
   padding: 0.4em;
+}
+
+table td {
+  padding-right: 1em;
 }
 
 table th {
   text-align: center;
 }
 
-table .action {
-  cursor: pointer;
-  color: blue;
+thead {
+  background-color: #2a9c5d80;
 }
 
-table tr:hover {
+tbody tr td:first-child {
+  padding: 0;
+  text-align: center;
+  font-weight: bold;
+}
+.action {
+  text-align: center;
+}
+
+.action:hover {
+  scale: 1.1;
+}
+
+.remove {
+  color: rgb(186, 45, 45);
+  cursor: pointer;
+}
+
+.edit {
+  color: rgb(31, 47, 142);
+  cursor: pointer;
+}
+
+tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.04);
 }

@@ -3,9 +3,6 @@
 const tbody = document.getElementById('list')
 const form = document.getElementById('add-form')
 
-let total = 0
-let loaned = 0
-
 /* 
 This prevents the default form submission which refreshes the page
 and set a custom one 
@@ -27,9 +24,9 @@ form.addEventListener('submit', event => {
 
 
 
-function loadBooks() {
+function loadBooks(url = '../app/router.php') {
+  tbody.innerHTML = ''
   const xhr = new XMLHttpRequest()
-  const url = '../app/router.php'
   try {
     xhr.open('GET', url, true)
   } catch (error) {
@@ -39,31 +36,31 @@ function loadBooks() {
     if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
       
       const data = JSON.parse(xhr.responseText)
-      total = data.length;
+      if(data.length == 0) {
+        alert('لا يوجد أي كتاب مسجل ')
+        return
+      }
       let i = 1
       for (const book of data) {
-          const tr = document.createElement('tr')
-          const td1 = document.createElement('td')
-          const td2 = document.createElement('td')
+        
+        const tr = document.createElement('tr')
+        const td1 = document.createElement('td')
+        const td2 = document.createElement('td')
         const td3 = document.createElement('td')
         const td4 = document.createElement('td')
         const td5 = document.createElement('td')
         const td6 = document.createElement('td')
         const td7 = document.createElement('td')
-        td1.innerHTML = `<p href="" id="${book['id']}" onclick="remove(this)" class="action">إزالة</p>`
-        td2.innerHTML = `<p href="" id="${book['id']}" onclick="edit(this)" class="action">تعديل</p>`
-        td3.textContent = book['notes']
+
+        td7.innerHTML = `<p href="" id="${book['id']}" onclick="remove(this)" class="action remove">إزالة</p>`
+        td6.innerHTML = `<p href="" id="${book['id']}" onclick="edit(this)" class="action edit">تعديل</p>`
+        td5.textContent = book['notes']
         td4.textContent = book['loaner']
-        td5.textContent = book['author']
-        td6.textContent = book['title']
-        td7.textContent = i++
+        td3.textContent = book['author']
+        td2.textContent = book['title']
+        td1.textContent = i++
         tr.append(td1, td2, td3, td4, td4, td5, td6, td7);
         tbody.appendChild(tr)
-
-        if(book['loaner'].trim() != '') {
-          loaned++
-        }
-
 
       }
     }
@@ -97,10 +94,10 @@ function edit(element) {
   
   const rowChildren = element.parentElement.parentElement.children
   
-  document.getElementById('title').value = rowChildren[5].textContent
-  document.getElementById('author').value = rowChildren[4].textContent
-  document.getElementById('loaner').value = rowChildren[3].textContent
-  document.getElementById('notes').value = rowChildren[2].textContent
+  document.getElementById('title').value = rowChildren[2].textContent
+  document.getElementById('author').value = rowChildren[3].textContent
+  document.getElementById('loaner').value = rowChildren[4].textContent
+  document.getElementById('notes').value = rowChildren[5].textContent
   
   document.getElementById('add').textContent = 'تعديل'
   
@@ -170,29 +167,22 @@ const stats = document.getElementById('stats')
 stats.addEventListener('click', event => {
  
 
-  // const xhr = new XMLHttpRequest()
+  const xhr = new XMLHttpRequest()
 
-  // xhr.open('GET', '../app/router.php?action=count/0')
-  // xhr.send()
-  // xhr.onload = function() {
-  //   console.log(xhr.responseText);
-  //   const data = JSON.parse(xhr.responseText)
-  //   var total = parseInt(data['total'])
-  //   console.log(total);
-  // }
 
-  // xhr.open('GET', '../app/router.php?action=count/1')
-  // xhr.send()
-  // xhr.onload = function() {
-    //   const data = JSON.parse(xhr.responseText)
-    //   loaned = parseInt(data['loaned'])
-    // }
-    
+  xhr.open('GET', '../app/router.php?action=count')
+  xhr.send()
+  xhr.onload = function() {
+    // console.log(xhr.responseText);
+    const data = JSON.parse(xhr.responseText)
+    const total = parseInt(data['total'])
+    const loaned = parseInt(data['loaned'])
     const unloaned = total - loaned
+  
     let message = `المقترضة: ${loaned}\n غير المقترضة: ${unloaned}\nالمجموع : ${total}\n `
     window.alert(message)
-    total = 0
-    loaned = 0
+  }
+
 })
 /* *************************************************************** */
 
@@ -200,53 +190,13 @@ stats.addEventListener('click', event => {
 
 /* ************************* search ****************************** */
 const search = document.getElementById('search')
-const pattern = document.getElementById('search-pattern').value.trim()
+const searchPattern = document.getElementById('search-pattern')
 search.addEventListener('click', event => {
+  const pattern = searchPattern.value.trim()
   if(pattern.length > 0) {
-
-    tbody.innerHTML = ''
-
-    const xhr = new XMLHttpRequest()
-    const url = `../app/router.php?action=search/${pattern}`
-    try {
-      xhr.open('GET', url, true)
-    } catch (error) {
-      
-    }
-    xhr.onreadystatechange = function() {
-      if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-        
-        const data = JSON.parse(xhr.responseText)
-        total = data.length;
-        let i = 1
-        for (const book of data) {
-            const tr = document.createElement('tr')
-            const td1 = document.createElement('td')
-            const td2 = document.createElement('td')
-          const td3 = document.createElement('td')
-          const td4 = document.createElement('td')
-          const td5 = document.createElement('td')
-          const td6 = document.createElement('td')
-          const td7 = document.createElement('td')
-          td1.innerHTML = `<p href="" id="${book['id']}" onclick="remove(this)" class="action">إزالة</p>`
-          td2.innerHTML = `<p href="" id="${book['id']}" onclick="edit(this)" class="action">تعديل</p>`
-          td3.textContent = book['notes']
-          td4.textContent = book['loaner']
-          td5.textContent = book['author']
-          td6.textContent = book['title']
-          td7.textContent = i++
-          tr.append(td1, td2, td3, td4, td4, td5, td6, td7);
-          tbody.appendChild(tr)
-  
-          if(book['loaner'].trim() != '') {
-            loaned++
-          }
-  
-  
-        }
-      }
-    }
-    xhr.send()
+    loadBooks(`../app/router.php?action=search/${pattern}`)
+  } else {
+    loadBooks();
   }
 })
 /* *************************************************************** */

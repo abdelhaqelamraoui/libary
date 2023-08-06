@@ -57,4 +57,8 @@ class BookModel {
     return $this->dp->getTotalOfLoanedBooks();
   }
 
+  function search(string $pattern) {
+    return $this->dp->search($pattern);
+  }
+
 }

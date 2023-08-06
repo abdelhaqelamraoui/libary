@@ -5,5 +5,5 @@ TODO [] : in order to render the page. Remove the row from
            the UI table and from the database two. Render 
            only when the page is loaded or reloaded.
 
-TODO [] : add search
+TODO [/] : add search : gloabal search is added
 TODO [] : add filters (show inly loaned books or not loaned)

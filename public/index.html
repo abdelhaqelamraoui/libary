@@ -11,18 +11,18 @@
 <body>
   <header>
     <div class="actions">
-  
-      <div class="search-div">  
-        <button id="search">إبحث</button>
-        <input type="search" id="search-pattern" placeholder="عنوان أوكاتب الكتا أو المقترض">
-      </div>
-      
       
       <div class="options">
         <button id="stats">إحصائيات</button>
         <!-- <button>تحميل ملف إحصائي</button> -->
         <!-- <button>إضافة كتاب</button> -->
       </div>
+  
+      <div class="search-div">  
+        <input type="search" id="search-pattern" placeholder="عنوان أو كاتب الكتاب أو المقترض">
+        <button id="search">إبحث</button>
+      </div>
+      
       
     </div>
   </header>
@@ -33,12 +33,12 @@
       <table>
         <thead>
           <tr>
-            <th colspan="2">اختيارات</th>
-            <th>ملاحظات</th>
-            <th>المقترض</th>
-            <th>الكاتب</th>
-            <th>العنوان</th>
             <th>الرقم</th>
+            <th>العنوان</th>
+            <th>الكاتب</th>
+            <th>المقترض</th>
+            <th>ملاحظات</th>
+            <th colspan="2">اختيارات</th>
           </tr>
         </thead>
         <tbody id="list"></tbody>
@@ -49,11 +49,11 @@
 
   <footer>
     <form method="post" id="add-form">
-      <button id="add" name="add">إضافة</button>
-      <input type="text" id="notes" name="notes" placeholder="ملاحظات">
-      <input type="text" id="loaner" name="loaner" placeholder="المقترض">
-      <input type="text" id="author" name="author" placeholder="الكاتب">
       <input type="text" id="title" name="title" placeholder="العنوان" required>
+      <input type="text" id="author" name="author" placeholder="الكاتب">
+      <input type="text" id="loaner" name="loaner" placeholder="المقترض">
+      <input type="text" id="notes" name="notes" placeholder="ملاحظات">
+      <button id="add" name="add">إضافة</button>
     </form>
   </footer>
 </body>

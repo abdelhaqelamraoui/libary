@@ -30,12 +30,12 @@ if(is_get()) {
   if($args) {
     $arrArgs = explode('/', $args);
     $action = $arrArgs[0];
-    $id = $arrArgs[1] ?? false;
+    $arg = $arrArgs[1] ?? false;
     
-    if($id === false) {
+    if($arg === false) {
       $bookController->$action();
     } else {
-      $bookController->$action((int) $id);
+      $bookController->$action($arg);
 
     }
 

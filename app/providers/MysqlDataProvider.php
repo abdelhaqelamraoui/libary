@@ -8,7 +8,7 @@ namespace App\Providers;
 
 use App\Database\Database;
 use App\Classes\Book;
-
+use PDO;
 
 class MysqlDataProvider extends DataProvider {
 
@@ -75,12 +75,25 @@ class MysqlDataProvider extends DataProvider {
   }
 
   function getTotalOfBooks(): int {
-    $res =  $this->db->query("SELECT COUNT(id) FROM books;");
+    $res =  $this->db->query(
+      "SELECT COUNT(id) FROM books;",
+      mode:PDO::FETCH_COLUMN
+    );
     return (int) $res[0];
   }
 
   function getTotalOfLoanedBooks(): int {
-    $res =  $this->db->query("SELECT COUNT(id) FROM books WHERE loaner <> ''");
+    $res =  $this->db->query(
+      "SELECT COUNT(id) FROM books WHERE loaner <> ''",
+      mode:PDO::FETCH_COLUMN
+    );
     return (int) $res[0];
+  }
+
+  function search(string $pattern): array {
+    return $this->db->query(
+      'SELECT * FROM books WHERE title LIKE ? OR author LIKE ? OR loaner LIKE ? OR notes LIKE ?;',
+      ['%'.$pattern.'%', '%'.$pattern.'%', '%'.$pattern.'%', '%'.$pattern.'%']
+    );
   }
 }

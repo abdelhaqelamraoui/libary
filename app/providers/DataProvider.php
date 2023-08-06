@@ -20,5 +20,6 @@ abstract class DataProvider {
 
   abstract function getTotalOfBooks(): int;
   abstract function getTotalOfLoanedBooks(): int;
+  abstract function search(string $pattern): array;
  
 }

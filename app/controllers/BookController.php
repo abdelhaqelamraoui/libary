@@ -26,32 +26,27 @@ class BookController {
     // echo "Hello from list";
   }
 
-  public function add() {
-   
-  }
-
-  public function edit(int $id) {
+  public function edit($id) {
     $book = $this->bookModel->getBookById($id);
     echoJSONData($book);
    
   }
 
-  public function remove(int $id) {
+  public function remove($id) {
     if($this->bookModel->deleteBook($id)) {
       echo 'book has been deleted';
     }
   }
 
-  public function count(int $key = 0) {
-    switch($key) {
-      case 1:
-        echoJSONData(['loaned' => $this->bookModel->getTotalOfLoanedBooks()]);
-        break;
-      default:
-          echoJSONData(['total' => $this->bookModel->getTotalOfBooks()]);
-    }
+  public function count() {
+    echoJSONData(['total' => $this->bookModel->getTotalOfBooks(),
+                  'loaned' => $this->bookModel->getTotalOfLoanedBooks()]);
   }
 
+  public function search(string $pattern) {
+    $books = $this->bookModel->search($pattern);
+    echoJSONData($books);
+  }
 
   /* ************************ Model methods ****************************/
 
