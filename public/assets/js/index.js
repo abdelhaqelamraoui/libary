@@ -37,7 +37,7 @@ function loadBooks(url = '../app/router.php') {
       
       const data = JSON.parse(xhr.responseText)
       if(data.length == 0) {
-        alert('لا يوجد أي كتاب مسجل ')
+        alert('لا يوجد أي كتاب ')
         return
       }
       let i = 1
@@ -52,8 +52,12 @@ function loadBooks(url = '../app/router.php') {
         const td6 = document.createElement('td')
         const td7 = document.createElement('td')
 
-        td7.innerHTML = `<p href="" id="${book['id']}" onclick="remove(this)" class="action remove">إزالة</p>`
-        td6.innerHTML = `<p href="" id="${book['id']}" onclick="edit(this)" class="action edit">تعديل</p>`
+        // td7.innerHTML = `<p href="" id="${book['id']}" onclick="remove(this)" class="action remove">إزالة</p>`
+        // td6.innerHTML = `<p href="" id="${book['id']}" onclick="edit(this)" class="action edit">تعديل</p>`
+        td7.innerHTML = `<img id="${book['id']}" onclick="remove(this)" class="action" src="assets/icons/delete.gif"/>`
+        td7.classList = 'action-td'
+        td6.innerHTML = `<img id="${book['id']}" onclick="edit(this)" class="action" src="assets/icons/edit.gif"/>`
+        td6.classList = 'action-td'
         td5.textContent = book['notes']
         td4.textContent = book['loaner']
         td3.textContent = book['author']
@@ -94,10 +98,10 @@ function edit(element) {
   
   const rowChildren = element.parentElement.parentElement.children
   
-  document.getElementById('title').value = rowChildren[2].textContent
-  document.getElementById('author').value = rowChildren[3].textContent
-  document.getElementById('loaner').value = rowChildren[4].textContent
-  document.getElementById('notes').value = rowChildren[5].textContent
+  document.getElementById('title').value = rowChildren[1].textContent
+  document.getElementById('author').value = rowChildren[2].textContent
+  document.getElementById('loaner').value = rowChildren[3].textContent
+  document.getElementById('notes').value = rowChildren[4].textContent
   
   document.getElementById('add').textContent = 'تعديل'
   
@@ -136,7 +140,7 @@ function editBook() {
 function remove(element) {
 
  const id = element.id
- const title = element.parentElement.parentElement.children[5].textContent
+ const title = element.parentElement.parentElement.children[1].textContent
  const message = ' أترغب في إزالة الكتاب' + ' : ' + title
  const xhr = new XMLHttpRequest()
  const url = `../app/router.php?action=remove/${id}`
@@ -147,6 +151,7 @@ function remove(element) {
   } 
   
   xhr.onload = function() {
+    //console.log(xhr.responseText);
     render()
   }
 

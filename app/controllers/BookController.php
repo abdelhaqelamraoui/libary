@@ -27,13 +27,13 @@ class BookController {
   }
 
   public function edit($id) {
-    $book = $this->bookModel->getBookById($id);
+    $book = $this->bookModel->getBookById((int)$id);
     echoJSONData($book);
    
   }
 
   public function remove($id) {
-    if($this->bookModel->deleteBook($id)) {
+    if($this->bookModel->deleteBook((int)$id)) {
       echo 'book has been deleted';
     }
   }

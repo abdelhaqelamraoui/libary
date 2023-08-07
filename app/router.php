@@ -85,5 +85,32 @@ if(is_post()) {
       $bookController->list();
     }
   }
-}
+
+  if(isset($_POST['csv'])) {
+
+    $tmpName = $_FILES['csv-file']['tmp_name'];
+
+    $lines = file($tmpName);
+
+    foreach($lines as $line) {
+
+      $line = str_replace('،', ',', $line); // replacing the arabic comma for getting csv format
+      $rowData = str_getcsv($line);
+
+      if(empty($rowData[0])) {
+          continue;
+        }
+        
+      $title = trim($rowData[0]);
+      $auhtor = trim($rowData[1] ?? '');
+      $loaner = trim($rowData[2] ?? '');
+      $notes = trim($rowData[3] ?? '');
+      $bookController->addBook($title, $auhtor, $loaner, $notes);
+
+    }
+    
+  }
+
+
+} // is_post
 

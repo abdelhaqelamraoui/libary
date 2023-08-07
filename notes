@@ -1,2 +1,4 @@
 
-- Statistiques are now gotten fro the DB everytime they are requested
+- Statistiques are now gotten from the DB everytime they are requested
+
+- every file written as csv format can be imported

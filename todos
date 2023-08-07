@@ -6,4 +6,7 @@ TODO [] : in order to render the page. Remove the row from
            only when the page is loaded or reloaded.
 
 TODO [/] : add search : gloabal search is added
-TODO [] : add filters (show inly loaned books or not loaned)
+TODO [] : add filters (show only loaned books or not loaned)
+
+TODO [x] : add option of importing csv file
+TODO [] : 

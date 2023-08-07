@@ -10,40 +10,40 @@
 </head>
 <body>
   <header>
-    <div class="actions">
-      
-      <div class="options">
-        <button id="stats">إحصائيات</button>
-        <!-- <button>تحميل ملف إحصائي</button> -->
-        <!-- <button>إضافة كتاب</button> -->
-      </div>
-  
-      <div class="search-div">  
-        <input type="search" id="search-pattern" placeholder="عنوان أو كاتب الكتاب أو المقترض">
-        <button id="search">إبحث</button>
-      </div>
-      
-      
+    <div class="options">
+      <button id="stats">إحصائيات</button>
+      <!-- <button>تحميل ملف إحصائي</button> -->
+      <!-- <button></button> -->
+      <form method="post" enctype="multipart/form-data" id="csv-form">
+        <input type="file" id="csv-file" name="csv-file" required>
+        <button>رفع الملف</button>
+      </form>
+
+
+    </div>
+
+    <img src="./assets/icons/logo5.png" alt="logo" class="logo">
+
+    <div class="search-div">  
+      <input type="search" id="search-pattern" placeholder="عنوان أو كاتب الكتاب أو المقترض">
+      <button id="search">إبحث</button>
     </div>
   </header>
 
   <main>
-
-    <div class="show">
-      <table>
-        <thead>
-          <tr>
-            <th>الرقم</th>
-            <th>العنوان</th>
-            <th>الكاتب</th>
-            <th>المقترض</th>
-            <th>ملاحظات</th>
-            <th colspan="2">اختيارات</th>
-          </tr>
-        </thead>
-        <tbody id="list"></tbody>
-      </table>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>الرقم</th>
+          <th>العنوان</th>
+          <th>الكاتب</th>
+          <th>المقترض</th>
+          <th>ملاحظات</th>
+          <th colspan="2">اختيارات</th>
+        </tr>
+      </thead>
+      <tbody id="list"></tbody>
+    </table>
 
   </main>
 
@@ -60,5 +60,6 @@
 
 
 <script src="assets/js/index.js"></script>
+<script src="assets/js/file.js"></script>
 <script>loadBooks()</script>
 </html>
