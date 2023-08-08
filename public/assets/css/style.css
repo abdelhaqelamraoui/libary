@@ -191,12 +191,10 @@ tbody tr td:first-child {
 }
 
 .remove {
-  color: rgb(186, 45, 45);
   cursor: pointer;
 }
 
 .edit {
-  color: rgb(31, 47, 142);
   cursor: pointer;
 }
 

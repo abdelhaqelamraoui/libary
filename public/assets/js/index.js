@@ -151,9 +151,11 @@ function remove(element) {
  const url = `../app/router.php?action=remove/${id}`
  xhr.open('GET', url, true)
 
- if(window.confirm(message)) {
-   xhr.send()
-  } 
+
+showConfirmatioinDialog('إزالة كتاب', message, () => {
+  xhr.send()
+  
+  })
   
   xhr.onload = function() {
     //console.log(xhr.responseText);

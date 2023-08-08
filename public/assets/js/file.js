@@ -31,11 +31,16 @@ function uploadCSVFile() {
   }
 
   const message = 'هل أنت متأكد من رفع الملف ؟'
-  if(window.confirm(message)) {
+  
+  // if(window.confirm(message)) {
+  //   xhr.send(formData)
+  // } else {
+  //   csvFile.value = ''
+  // }
+
+  showConfirmatioinDialog('', message, () => {
     xhr.send(formData)
-  } else {
-    csvFile.value = ''
-  }
+  })
 
 
 }
