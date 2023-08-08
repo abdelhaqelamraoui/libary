@@ -3,6 +3,11 @@
 const tbody = document.getElementById('list')
 const form = document.getElementById('add-form')
 
+const stats = document.getElementById('stats')
+const search = document.getElementById('search')
+const searchPattern = document.getElementById('search-pattern')
+
+
 /* 
 This prevents the default form submission which refreshes the page
 and set a custom one 
@@ -37,7 +42,7 @@ function loadBooks(url = '../app/router.php') {
       
       const data = JSON.parse(xhr.responseText)
       if(data.length == 0) {
-        alert('لا يوجد أي كتاب ')
+        //alert('لا يوجد أي كتاب ')
         return
       }
       let i = 1
@@ -168,7 +173,7 @@ function clearForm() {
 
 
 /* ************************** stats ***************************** */
-const stats = document.getElementById('stats')
+
 stats.addEventListener('click', event => {
  
 
@@ -194,9 +199,21 @@ stats.addEventListener('click', event => {
 
 
 /* ************************* search ****************************** */
-const search = document.getElementById('search')
-const searchPattern = document.getElementById('search-pattern')
+
 search.addEventListener('click', event => {
+  const pattern = searchPattern.value.trim()
+  if(pattern.length > 0) {
+    loadBooks(`../app/router.php?action=search/${pattern}`)
+  } else {
+    loadBooks();
+  }
+})
+
+/* 
+  This is for performing live search without clicking
+  the search button
+*/
+searchPattern.addEventListener('input', event => {
   const pattern = searchPattern.value.trim()
   if(pattern.length > 0) {
     loadBooks(`../app/router.php?action=search/${pattern}`)
