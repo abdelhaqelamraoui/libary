@@ -1,11 +1,14 @@
 
 
+const body = document.querySelector('body')
 const tbody = document.getElementById('list')
 const form = document.getElementById('add-form')
+const table = document.querySelector('table')
 
 const stats = document.getElementById('stats')
 const search = document.getElementById('search')
 const searchPattern = document.getElementById('search-pattern')
+const dark = document.getElementById('dark')
 
 
 /* 
@@ -59,9 +62,9 @@ function loadBooks(url = '../app/router.php') {
 
         // td7.innerHTML = `<p href="" id="${book['id']}" onclick="remove(this)" class="action remove">إزالة</p>`
         // td6.innerHTML = `<p href="" id="${book['id']}" onclick="edit(this)" class="action edit">تعديل</p>`
-        td7.innerHTML = `<img id="${book['id']}" onclick="remove(this)" class="action" src="assets/icons/delete.gif"/>`
+        td7.innerHTML = `<img id="${book['id']}" onclick="remove(this)" class="action" src="assets/icons/delete_red.gif"/>`
         td7.classList = 'action-td'
-        td6.innerHTML = `<img id="${book['id']}" onclick="edit(this)" class="action" src="assets/icons/edit.gif"/>`
+        td6.innerHTML = `<img id="${book['id']}" onclick="edit(this)" class="action" src="assets/icons/edit_blue.gif"/>`
         td6.classList = 'action-td'
         td5.textContent = book['notes']
         td4.textContent = book['loaner']
@@ -144,12 +147,12 @@ function editBook() {
 
 function remove(element) {
 
- const id = element.id
- const title = element.parentElement.parentElement.children[1].textContent
- const message = ' أترغب في إزالة الكتاب' + ' : ' + title
- const xhr = new XMLHttpRequest()
- const url = `../app/router.php?action=remove/${id}`
- xhr.open('GET', url, true)
+  const id = element.id
+  const title = element.parentElement.parentElement.children[1].textContent
+  const message = ' أترغب في إزالة الكتاب' + ' : ' + title
+  const xhr = new XMLHttpRequest()
+  const url = `../app/router.php?action=remove/${id}`
+  xhr.open('GET', url, true)
 
 
 showConfirmatioinDialog('إزالة كتاب', message, () => {
@@ -226,3 +229,31 @@ searchPattern.addEventListener('input', event => {
 /* *************************************************************** */
 
 
+/* *************************** dark ****************************** */
+dark.addEventListener('click', enableDarkMode)
+/* *************************************************************** */
+
+function enableDarkMode() {
+  if(dark.checked) {
+    body.style.backgroundColor = '#000'
+    tbody.style = 'color: rgba(255,255,255,0.74) !important'
+    localStorage.setItem('theme', 'dark')
+  } else {
+    body.style.backgroundColor = 'rgba(244, 198, 90, 0.098)'
+    tbody.style = 'color: rgba(0, 0, 0, 0.9) !important'
+    localStorage.setItem('theme', 'light')
+  }
+  render()
+
+  body.className.replace('light', 'dark')
+}
+
+
+function testDarkMode() {
+  const theme = localStorage.getItem('theme')
+  console.log(theme);
+  if(theme == 'dark') {
+    dark.checked = true
+    enableDarkMode()
+  }
+}

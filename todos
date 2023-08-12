@@ -9,4 +9,6 @@ TODO [/] : add search : gloabal search is added
 TODO [] : add filters (show only loaned books or not loaned)
 
 TODO [x] : add option of importing csv file
-TODO [] : 
+TODO [] : add pagination
+TODO [] : dark mode
+TODO [] : add custom font within the project

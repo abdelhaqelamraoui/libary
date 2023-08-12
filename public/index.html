@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/dialogs.css">
-  <title>Document</title>
+  <link rel="stylesheet" href="assets/css/dark.css">
+  <title>المكتبة الخاصة</title>
 </head>
-<body>
+<body class="light">
   <header>
     <div class="options">
       <button id="stats">إحصائيات</button>
@@ -17,10 +18,14 @@
       <form method="post" enctype="multipart/form-data" id="csv-form">
         <input type="file" id="csv-file" name="csv-file" required>
         <button>رفع الملف</button>
-      </form>
-
-
+      </form>      
+      <label class="dark-check">
+        <input type="checkbox" id="dark">
+         الوضع المظلم
+      </label>
     </div>
+
+
     <a href=".">
       <img src="./assets/icons/logo5.png" alt="logo" class="logo">
     </a>
@@ -32,7 +37,7 @@
   </header>
 
   <main>
-    <table>
+    <table class="list">
       <thead>
         <tr>
           <th>الرقم</th>
@@ -64,5 +69,6 @@
 <script src="assets/js/file.js"></script>
 <script src="assets/js/dialogs.js"></script>
 <script>loadBooks()</script>
+<script>testDarkMode()</script>
 <!-- <script>showConfirmatioinDialog('title', 'message', e => {})</script> -->
 </html>
