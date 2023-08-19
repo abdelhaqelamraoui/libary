@@ -27,18 +27,31 @@
 
 
 
+body {
+  /* padding-top: 4em;
+  padding-bottom: 4em; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+
+}
+
+
 .light {
-  padding-top: 4em;
-  padding-bottom: 4em;
   background-color: rgba(244, 198, 90, 0.098);
   color: rgba(0, 0, 0, 0.9);
+}
 
+.dark {
+  color: rgba(234, 233, 233, 0.893) !important;
+  background-color: #06070b;
 }
 
 /* header  ************************************************************************ */
 
 header {
-  position: fixed;
+  position: sticky;
   top: 0;
   width: 100%;
   background-color: rgb(23, 63, 76);
@@ -83,7 +96,7 @@ header div {
 /* footer  ************************************************************************ */
 
 footer {
-  position: fixed;
+  position: sticky;
   bottom: 0;
   width: 100%;
   /* background-color: lightcoral; */
@@ -114,7 +127,12 @@ footer #notes {
 /* ************************************************************************** footer*/
 
 main {
-  padding: 2em
+  padding: 1em 2em;
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items:  center;
 }
 
 
@@ -144,6 +162,10 @@ input {
 input:focus{
   /* border-color: antiquewhite; */
   
+}
+
+#csv-file {
+  display: none;
 }
 
 #search-pattern {
@@ -178,14 +200,16 @@ table thead {
   z-index: 100;
 }
 
-table td,
-th {
+
+table td, th {
   border: 1px solid rgb(45, 44, 44);
-  padding: 0.4em;
+  padding: 4px;
 }
 
 table td {
-  padding-right: 0.5em;
+  text-transform: capitalize;
+  text-overflow: ellipsis;
+  padding-right: 1em;
 }
 
 table th {
@@ -200,7 +224,7 @@ tbody tr td:first-child {
 }
 .action {
   /* text-align: center; */
-  width: 1.2em;
+  width: 20px;
 }
 
 .action:hover {
@@ -217,11 +241,24 @@ tbody tr td:first-child {
 
 tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.04);
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .action-td {
   text-align: center;
-  margin-top: 0.8em;
-  padding: 0.2em;
+  margin-top: 8px;
+  padding: 4px;
+}
+
+.pagination > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+}
+
+.pagination a {
+  color: #3faf6c;
+  font-size: 1.6em;
+  cursor: pointer;
 }

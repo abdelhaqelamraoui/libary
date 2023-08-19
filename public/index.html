@@ -13,11 +13,9 @@
   <header>
     <div class="options">
       <button id="stats">إحصائيات</button>
-      <!-- <button>تحميل ملف إحصائي</button> -->
-      <!-- <button></button> -->
       <form method="post" enctype="multipart/form-data" id="csv-form">
+        <label for="csv-file" style="color: #fff">رفع ملف إحصائي</label>
         <input type="file" id="csv-file" name="csv-file" required>
-        <button>رفع الملف</button>
       </form>      
       <label class="dark-check">
         <input type="checkbox" id="dark">
@@ -48,11 +46,31 @@
           <th colspan="2">اختيارات</th>
         </tr>
       </thead>
-      <tbody id="list"></tbody>
+      <tbody id="list">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tbody>
     </table>
-
+    
+    <div class="pagination">
+      <div>
+        <a id="previous">&lt&lt</a>
+        <div>
+          <span id="page">1</span>
+          \
+          <span id="number-pages"></span>
+        </div>
+        <a id="next">&gt&gt</a>
+      </div>
+    </div>
+  
   </main>
-
+  
   <footer>
     <form method="post" id="add-form">
       <input type="text" id="title" name="title" placeholder="العنوان" required>
