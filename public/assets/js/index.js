@@ -30,54 +30,55 @@ form.addEventListener('submit', event => {
   }
 })
 
-
-
-function loadBooks(url = '../app/router.php') {
-  tbody.innerHTML = ''
+function ajax(callback, index = 0, url = '../app/router.php') {
   const xhr = new XMLHttpRequest()
-  try {
-    xhr.open('GET', url, true)
-  } catch (error) {
-    
-  }
+  // const url = '../app/router.php'
   xhr.onreadystatechange = function() {
     if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-      
-      const data = JSON.parse(xhr.responseText)
-      if(data.length == 0) {
-        //alert('لا يوجد أي كتاب ')
-        return
-      }
-      let i = 1
-      for (const book of data) {
-        
-        const tr = document.createElement('tr')
-        const td1 = document.createElement('td')
-        const td2 = document.createElement('td')
-        const td3 = document.createElement('td')
-        const td4 = document.createElement('td')
-        const td5 = document.createElement('td')
-        const td6 = document.createElement('td')
-        const td7 = document.createElement('td')
-
-        // td7.innerHTML = `<p href="" id="${book['id']}" onclick="remove(this)" class="action remove">إزالة</p>`
-        // td6.innerHTML = `<p href="" id="${book['id']}" onclick="edit(this)" class="action edit">تعديل</p>`
-        td7.innerHTML = `<img id="${book['id']}" onclick="remove(this)" class="action" src="assets/icons/delete_red.gif"/>`
-        td7.classList = 'action-td'
-        td6.innerHTML = `<img id="${book['id']}" onclick="edit(this)" class="action" src="assets/icons/edit_blue.gif"/>`
-        td6.classList = 'action-td'
-        td5.textContent = book['notes']
-        td4.textContent = book['loaner']
-        td3.textContent = book['author']
-        td2.textContent = book['title']
-        td1.textContent = i++
-        tr.append(td1, td2, td3, td4, td4, td5, td6, td7);
-        tbody.appendChild(tr)
-
-      }
+      data = JSON.parse(xhr.responseText)
+      callback(data, index)
     }
   }
+
+  xhr.open('GET', url, true)
   xhr.send()
+
+}
+
+function loadBooks(url = '../app/router.php') {
+  ajax(renderBooks, 0, url)
+}
+
+function renderBooks(data, index = 0) {
+
+  if(index < 0) {
+    return
+  }
+
+  
+  tbody.innerHTML = ''
+
+  for (; index < data.length; index++) {
+
+    const book = data[index];
+    const tr = document.createElement('tr')
+  
+    tr.innerHTML = `
+      <td>${index+1}</td>
+      <td>${book['title']}</td>
+      <td>${book['author']}</td>
+      <td>${book['loaner']}</td>
+      <td>${book['notes']}</td>
+      <td class="action">
+        <img id="${book['id']}" onclick="edit(this)" class="action-icon" src="assets/icons/edit_blue.gif"/>
+      </td>
+      <td class="action">
+        <img id="${book['id']}" onclick="remove(this)" class="action-icon" src="assets/icons/delete_red.gif"/>
+      </td>
+    `
+    tbody.appendChild(tr)
+  }
+      
 }
 
 function render() {
@@ -221,9 +222,13 @@ search.addEventListener('click', event => {
 searchPattern.addEventListener('input', event => {
   const pattern = searchPattern.value.trim()
   if(pattern.length > 0) {
-    loadBooks(`../app/router.php?action=search/${pattern}`)
+    // loadBooks(`../app/router.php?action=search/${pattern}`)
+    const url = `../app/router.php?action=search/${pattern}`
+    const index = parseInt(localStorage.getItem('index'))
+    ajax(renderBooks, index, url)
   } else {
-    loadBooks();
+    // loadBooks();
+    ajax(renderBooks)
   }
 })
 /* *************************************************************** */
@@ -235,25 +240,21 @@ dark.addEventListener('click', enableDarkMode)
 
 function enableDarkMode() {
   if(dark.checked) {
-    body.style.backgroundColor = '#000'
-    tbody.style = 'color: rgba(255,255,255,0.74) !important'
     localStorage.setItem('theme', 'dark')
+    document.body.className = 'dark'
+    document.querySelector('thead').style.color = 'black'
   } else {
-    body.style.backgroundColor = 'rgba(244, 198, 90, 0.098)'
-    tbody.style = 'color: rgba(0, 0, 0, 0.9) !important'
+    document.body.className = 'light'
     localStorage.setItem('theme', 'light')
   }
-  render()
-
-  body.className.replace('light', 'dark')
 }
-
 
 function testDarkMode() {
   const theme = localStorage.getItem('theme')
-  console.log(theme);
+
   if(theme == 'dark') {
     dark.checked = true
     enableDarkMode()
   }
 }
+

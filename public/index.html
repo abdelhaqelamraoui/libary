@@ -13,11 +13,9 @@
   <header>
     <div class="options">
       <button id="stats">إحصائيات</button>
-      <!-- <button>تحميل ملف إحصائي</button> -->
-      <!-- <button></button> -->
       <form method="post" enctype="multipart/form-data" id="csv-form">
+        <label for="csv-file" style="color: #fff">رفع ملف إحصائي</label>
         <input type="file" id="csv-file" name="csv-file" required>
-        <button>رفع الملف</button>
       </form>      
       <label class="dark-check">
         <input type="checkbox" id="dark">
@@ -31,13 +29,23 @@
     </a>
 
     <div class="search-div">  
-      <input type="search" id="search-pattern" placeholder="عنوان أو كاتب الكتاب أو المقترض">
+      <input type="search" id="search-pattern" placeholder="إبحث بعنوان أو كاتب الكتاب أو المقترض">
       <button id="search">إبحث</button>
     </div>
   </header>
 
   <main>
     <table class="list">
+
+      <colgroup>
+        <col class="col-number">
+        <col class="col-title">
+        <col class="col-author">
+        <col class="col-loaner">
+        <col class="col-notes">
+        <col class="col-action" span="2">
+      </colgroup>
+
       <thead>
         <tr>
           <th>الرقم</th>
@@ -48,11 +56,11 @@
           <th colspan="2">اختيارات</th>
         </tr>
       </thead>
-      <tbody id="list"></tbody>
+      <tbody id="list">
+      </tbody>
     </table>
-
   </main>
-
+  
   <footer>
     <form method="post" id="add-form">
       <input type="text" id="title" name="title" placeholder="العنوان" required>
@@ -70,5 +78,4 @@
 <script src="assets/js/dialogs.js"></script>
 <script>loadBooks()</script>
 <script>testDarkMode()</script>
-<!-- <script>showConfirmatioinDialog('title', 'message', e => {})</script> -->
 </html>

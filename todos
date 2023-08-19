@@ -5,10 +5,15 @@ TODO [] : in order to render the page. Remove the row from
            the UI table and from the database two. Render 
            only when the page is loaded or reloaded.
 
-TODO [/] : add search : gloabal search is added
+TODO [x] : add search : gloabal search is added
+
 TODO [] : add filters (show only loaned books or not loaned)
 
 TODO [x] : add option of importing csv file
-TODO [] : add pagination
-TODO [] : dark mode
-TODO [] : add custom font within the project
+
+TODO [] : add pagination 
+
+TODO [/] : dark mode
+        => change colors of other text and icons too
+
+TODO [/] : add custom font within the project
